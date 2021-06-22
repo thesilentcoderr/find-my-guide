@@ -1,0 +1,162 @@
+{% include 'layout.html' %} 
+{% block subcontent %}
+
+<style>
+    .contain {
+        padding-top: 50px;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    .in_row{
+        /*color: black;*/
+        font-size: 200%;
+        font-family: 'Roboto', sans-serif;
+    }
+    .post-title{
+        color: black;
+    }
+    .button {
+        background-color: #6377e4; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    .button:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+    .pager {
+        width: 100%;
+        display: inline-block;
+        overflow: auto;
+        white-space: nowrap;
+        margin: 0px auto;
+    }
+</style>
+
+{% if posts!=None %}
+<div class="contain">
+    {% include 'search_bar.html' %}
+    <hr>
+    <div class="in_row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <!--Dynamic fetching of post-->
+            {% for post in posts %}
+            <div class="post-preview">
+                <a href="/post/{{post[0]}}">
+                    <h2 class="post-title">{{post[1]}} </h2>
+                    <h3 class="post-subtitle">{{post[2]}}</h3>
+                </a>
+                <p>{{post[3][0:50]}}.... </p>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">{{post[-3]}}</a>
+                    on {{post[-2]}}
+                </p>
+            </div>
+            <hr />
+            {% endfor %}
+
+            <!--To Remove-->
+            <hr />
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">I believe every human has a finite number of heartbeats.</h2>
+                    <h3 class="post-subtitle">I don't intend to waste any of mine.</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on September 18, 2021
+                </p>
+            </div>
+            <hr />
+            
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">I believe every human has a finite number of heartbeats.</h2>
+                    <h3 class="post-subtitle">I don't intend to waste any of mine.</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on September 18, 2021
+                </p>
+            </div>
+            <hr />
+            
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">I believe every human has a finite number of heartbeats.</h2>
+                    <h3 class="post-subtitle">I don't intend to waste any of mine.</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on September 18, 2021
+                </p>
+            </div>
+            <hr />
+            
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">I believe every human has a finite number of heartbeats.</h2>
+                    <h3 class="post-subtitle">I don't intend to waste any of mine.</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on September 18, 2021
+                </p>
+            </div>
+            <hr />
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">Science has not yet mastered prophecy</h2>
+                    <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on August 24, 2021
+                </p>
+            </div>
+            <hr />
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">Failure is not an option</h2>
+                    <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on July 8, 2021
+                </p>
+            </div>
+            <hr />
+            <!--Till here-->
+        
+            <!-- Pager-->
+            <div class="pager">
+            <div style='float:left;'>
+            <a button class="button" href="{{prev}}">&larr; Older Posts</a></div>
+            <div style='float:right;'>
+            <a button class="button" href="{{next}}">Newer Posts &rarr;</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+<hr />
+<div class="footer">
+    {% include 'footer.html' %}
+</div>

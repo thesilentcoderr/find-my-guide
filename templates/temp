@@ -1,0 +1,22 @@
+#from flask_mysqldb import MySQL
+#from os import name, urandom
+#from os import getenv
+#from werkzeug.security import generate_password_hash as gen, check_password_hash as check
+
+
+#with open('vars.json','r') as v:
+#    variable = json.load(v)
+    
+#var = variable["variables"]
+#Wdb_keeps = variable["sql_conf"]
+
+
+
+#mysql = MySQL(app)
+# MySQL Configuration
+'''app.config['MYSQL_HOST'] = db_keeps["mysql_host"]
+app.config['MYSQL_USER'] = db_keeps["mysql_user"]
+app.config['MYSQL_PASSWORD'] = db_keeps["mysql_password"]
+app.config['MYSQL_DB'] = db_keeps["mysql_db"]
+app.config['MYSQL_PORT'] = db_keeps['mysql_port']
+app.secret_key = urandom(24)'''
