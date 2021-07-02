@@ -150,10 +150,22 @@ def customer_blog(id):
 @app.route("/booking")
 def booking():
     cur = mysql.connection.cursor()
-    q = cur.execute("select booking.*,customer_blogs.img_link_1,guides.full_name,ratings.rating  from  customer_blogs,booking,guides,ratings where customer_blogs.blog_id=booking.booking_id and booking.guide_id=guides.id and ratings.booking_id=booking.booking_id and booking.customer_id={} order by booking_id desc; ".format(session['id']))
+    q = cur.execute("select booking.*,customer_blogs.img_link_1,guides.full_name,ratings.rating  from  customer_blogs,booking,guides,ratings where customer_blogs.blog_id=booking.booking_id and booking.guide_id=guides.id and ratings.booking_id=booking.booking_id and booking.customer_id={} ; ".format(session['id']))
     if q>0:
         trips = cur.fetchall()
     return render_template("booking.html",trips=trips)
+
+@app.route("/booking/end/<int:id>/")
+def booking_end(id):
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE booking SET status='Completed' where booking_id={};".format(id))
+    return redirect('/booking')
+
+@app.route("/booking/cancel/<int:id>/")
+def booking_cancel(id):
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE booking SET status='Cancelled' where booking_id={};".format(id))
+    return redirect('/booking')
 
 @app.route("/logout")
 def logout():

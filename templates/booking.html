@@ -2,49 +2,47 @@
 {% block subcontent %}
   <style>
     .container {
-        max-height: auto;
-        min-height: 500px;
-        width: auto;
-        /*border: 5px solid black;*/
-        padding: 20px;
-        margin: 25px;
-        /*background-color: lightgrey;*/
-        font-family: 'Open-Sans';
+      max-height: auto;
+      min-height: 500px;
+      width: auto;
+      padding: 20px;
+      margin: 25px;
+      font-family: 'Open-Sans';
     }
     .button {
-        background-color: #6377e4; /* Green */
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 20px;
-        margin: 3px 2px;
-        cursor: pointer;
-        -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
+      background-color: #6377e4; 
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      margin: 3px 2px;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s; 
+      transition-duration: 0.4s;
     }
     .button:hover {
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
     }
     h1{
-        text-align:left;
-        display: block;
-        font-size: 4em;
-        font-weight: bold;
+      text-align:left;
+      display: block;
+      font-size: 4em;
+      font-weight: bold;
     }
     .title{
-        font-size: 1.5em;
-        font-weight: bold;
-        text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-align: center;
     }
     .box {
-        max-height: auto;
-        min-height: 500px;
-        width: auto;
-        margin-top: 57px;
-        background-color: rgb(255, 255, 255);
+      max-height: auto;
+      min-height: 500px;
+      width: auto;
+      margin-top: 57px;
+      background-color: rgb(255, 255, 255);
     }
     .main-container {
       padding: 30px;
@@ -62,7 +60,7 @@
       min-height: 500px;
       border-radius: 10px;
       box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
-      -webkit-transition-duration: 0.4s; /* Safari */
+      -webkit-transition-duration: 0.4s; 
       transition-duration: 0.4s;
     }
     .card:hover {
@@ -100,12 +98,14 @@
     .read-more a:hover{
       text-decoration: underline;
     }
-    
+    .right{
+      float:right;
+    }
   </style>
 
     <div class="container">
-      <div style='float:right;'>
-        <a button class="button" href="#!">Plan New Trip</a>
+      <div class="right">
+        <a id="button" class="button" href="#!">Plan New Trip</a>
       </div>
       {% if trips!=None %}
         <div class="box">
@@ -130,6 +130,11 @@
                     </div>
                   </div>
                 {% elif trip[6] == 'Due' %}  
+                  <script>var change = document.getElementById("button")
+                    change.style.backgroundColor ="gray";
+                    change.removeAttribute("href");
+                    change.style.pointerEvents="none";
+                  </script>
                   <div class="card">
                     {% set fname = 'img/dummy.png' %}
                     <div class="title">{{trip[1]}}</div>
@@ -141,22 +146,58 @@
                       <h3>Date: {{trip[3]}}</h3>
                       <h3>Status: {{trip[6]}}</h3>
 
+                      <var id="trip_id">{{trip[0]}}</var>
                       <p class="read-more">
-                        <a href="!#">End Trip</a>
+                        <a onclick="trip_end()">End Trip</a>
                       </p>
 
                       <p class="read-more">
-                        <a href="!#">Cancel Booking</a>
+                        <a onclick="cancel()">Cancel Booking</a>
                       </p>
                     </div>
                   </div>
+
+                  <script>
+                    function trip_end(){
+                      if (confirm('Do You Want to END Trip ?')) {
+                        var id = document.getElementById("trip_id").textContent;
+                        console.log(id)
+                        //window.location.href = "/booking/end/" + id;
+                      }
+                    }
+                    function cancel(){
+                      if (confirm('Do You Want to CANCEL Trip ?')) {
+                        var id = document.getElementById("trip_id").textContent;
+                        console.log(id)
+                        //window.location.href = "/booking/cancel/" + id;
+                      }
+                    }
+                  </script>
+
+                {% elif trip[6] == 'Cancelled' %}
+                  <div class="card">
+                    {% set fname = 'img/' + trip[-3] %}
+                    <div class="title">{{trip[1]}}</div>
+                    <img src=" {{ url_for ('static',filename=fname) }} " alt="img" >
+                    <div class="info">
+                      <h3 style="float: right;"><i class="fa fa-star" aria-hidden="true"></i>{{trip[-1]}}</h3>
+                      <h3>Gudie: <a href="!#">{{trip[-2]}}</a> </h3>
+                      <h3>Location: {{trip[2]}}</h3>
+                      <h3>Date: {{trip[3]}}</h3>
+                      <h3>Status: {{trip[6]}}</h3>
+                    </div>
+                  </div>
                 {% endif %}
+
+                
+
               {% endfor %}
             </div>
           </div>
         </div>
       {% endif %}
     </div>
+    
 
 {% endblock %}
 
