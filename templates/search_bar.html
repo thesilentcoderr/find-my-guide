@@ -1,4 +1,8 @@
-<style> 
+<style>
+    .sizing{
+      padding-left: 30%;
+      padding-right: 30%;
+    }
     input[type=text] {
       width: 130px;
       box-sizing: border-box;
@@ -6,7 +10,7 @@
       border-radius: 4px;
       font-size: 16px;
       background-color: white;
-      background-image: url('searchicon.png');
+      background-image: url(" {{ url_for('static',filename = 'searchicon.png') }} ");
       background-position: 10px 10px; 
       background-repeat: no-repeat;
       padding: 12px 20px 12px 40px;
@@ -19,17 +23,26 @@
     }
     form{
         padding-bottom: 5px;
+        display: inline-block;
+        overflow: auto;
+        white-space: nowrap;
+        margin: 0px auto;
     }
     .bar_title{
         font-size: 250%;
         font-family: 'Roboto', sans-serif;
         font-weight: 100;
+        padding-left: 20%;
     }
     
     </style>
-    
     <div class="bar_title">Search Tags:-</div>
-    
-    <form>
-      <input type="text" name="search" placeholder="Mota">
-    </form>
+    <div class="sizing">
+      
+      <form>
+        <input type="text" name="search" placeholder="Location">
+      </form>
+      <form>
+        <input type="text" name="search" placeholder="Role: User/Guide">
+      </form>
+    </div>

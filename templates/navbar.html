@@ -1,154 +1,107 @@
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap');
-
-* {
-    margin-top: 0;
+    * {
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
-
-html {
-    font-size: 62.5%;
-    font-family: 'Roboto', sans-serif;
+header {
+    height: 70px;
+    width: 100%;
+    background-color: #22292F;
+    padding: 10px 0;
 }
-
-li {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
-.header{
-    background-color: #57c8e4;
-    border-bottom: 1px solid hsl(246, 76%, 49%);
-}
-
-.navbar {
+.menu-wrap {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
+    padding: 0 15px;
 }
-
-.hamburger {
+.logo-img {
+    height: 50px;
+}
+.menu-icon {
+    font-size: 2.4em;
+    color: #ffffff;
+    line-height: 50px;
+}
+nav {
+    position: absolute;
+    background-color: #3D4852;
+    top:70px;
+    left:0;
+    width: 100%;
+}
+nav ul {
+    list-style-type: none;
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+nav ul li {
+    padding: 0 15px;
+}
+nav ul li a {
+    display: inline-block;
+    padding: 12px;
+    /* Add your custom styles below to change appearance of links */
+    color: #DAE1E7;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+}
+nav ul li a:hover, nav ul li a:focus {
+    color: #eb6f4a;
+}
+#checkbox {
     display: none;
 }
-
-.bar {
-    display: block;
-    width: 20px;
-    height: 3px;
-    margin: 5px auto;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    background-color: #101010;
+#checkbox:checked ~ nav ul {
+    max-height: 200px;
+    padding: 15px 0;
+    transition: all 0.5s;
 }
 
-.nav-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-item {
-    margin-left: 5rem;
-}
-
-.nav-link{
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: #000000;
-}
-
-.nav-link:hover{
-    color: #482ff7;
-}
-
-.nav-logo {
-    font-size: 3rem;
-    font-weight: 550;
-    color: #f02f0d;
-}
-
-@media only screen and (max-width: 768px) {
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 5rem;
-        flex-direction: column;
-        background-color: rgb(255, 255, 255);
-        width: 100%;
-        border-radius: 10px;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+@media (min-width: 999px) { 
+    .menu-icon {
+        display: none;
     }
-
-    .nav-menu.active {
-        left: 0;
+    nav {
+        position: relative;
+        top: -10px;
+        background-color: transparent;
     }
-
-    .nav-item {
-        margin: 2.5rem 0;
+    nav ul {
+        max-height: 70px;
+        padding: 15px 0;
+        text-align: right;
     }
-
-    .hamburger {
-        display: block;
-        cursor: pointer;
+    nav ul li {
+        display: inline-flex;
+        padding-left: 20px;
     }
-
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-
 }
 
 </style>
-<header class="header">
-  <nav class="navbar">
-      <a href="#" class="nav-logo">Find-My-Guide</a>
-      <ul class="nav-menu">
-          <li class="nav-item">
-              <a href="#" class="nav-link">Services</a>
-          </li>
-          <li class="nav-item">
-              <a href="/bloginfo" class="nav-link">Blog</a>
-          </li>
-          <li class="nav-item">
-              <a href="#" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-              <a href="#" class="nav-link">Contact</a>
-          </li>
-      </ul>
-      <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-      </div>
-  </nav>
-</header>
 
-<script>
-  const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
-
-hamburger.addEventListener("click", mobileMenu);
-
-function mobileMenu() {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-}
-</script>
-
-
+    <header class="menu">
+        <div class="menu-wrap">
+            <a href="/"><img src="{{ url_for ('static',filename='logo.png') }}" class="logo-img" alt="Logo"></a>
+            <input type="checkbox" id="checkbox">
+            <nav>
+                <ul>
+                    <li><a href="/booking">My Bookings</a></li>
+                    <li><a href="/guides">Guides</a></li>
+                    {% if session['logged_in'] == True %}
+                        <li><a href="#!">{{session['full_name']}}</a></li>
+                        <li><a href="/logout">logout</a></li>
+                    {% else %}
+                        <li><a href="/user/customer_login">Login Customer</a></li>
+                        <li><a href="/user/guide_login">Login Guide</a></li>
+                        <li><a href="/user/customer_register">Register Customer</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <label for="checkbox">
+                <i class="fa fa-bars menu-icon"></i>
+            </label>
+        </div>
+    </header>

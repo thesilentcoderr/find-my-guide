@@ -20,3 +20,99 @@ app.config['MYSQL_PASSWORD'] = db_keeps["mysql_password"]
 app.config['MYSQL_DB'] = db_keeps["mysql_db"]
 app.config['MYSQL_PORT'] = db_keeps['mysql_port']
 app.secret_key = urandom(24)'''
+
+
+
+<nav class="navbar">
+        <a href="/" class="nav-logo">Find-My-Guide</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/booking" class="nav-link">My Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/bloginfo" class="nav-link">Blog</a>
+                </li>
+
+            <!--    {% if session['logged_in'] == True %}
+                    <li class="nav-item">
+                        <a href="#!" class="nav-link">{{session['full_name']}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">logout</a>
+                    </li>
+                {% else %}
+                -->    <li class="nav-item">
+                        <a href="/user/customer_login" class="nav-link">Login Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/user/guide_login" class="nav-link">Login Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/user/customer_register" class="nav-link">Register Customer</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+
+            <!--<a href="/profile/{{user[0]}}" ><h2>Posted By: {{user[1]}} </h2></a>-->
+
+
+    
+    <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main-container {
+  padding: 30px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.card {
+  margin: 50px;
+  padding: 20px;
+  width: 280px;
+  min-height: 300px;
+  display: grid;
+  grid-template-rows: 20px 50px 1fr 50px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.5s;
+}
+
+</style>
+</head>
+<body>
+
+<h2>Round Card</h2>
+<div class="main-container">
+	<div class="card-container">
+		<div class="card">
+  
+  		</div>
+
+		<div class="card">
+  
+		</div>
+
+		<div class="card">
+  
+		</div>
+
+		<div class="card">
+  
+		</div>
+	</div>
+</div>
+
+</body>
+</html> 
