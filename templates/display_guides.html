@@ -1,0 +1,140 @@
+{% include 'layout.html' %}
+{% block subcontent %}
+    <style>
+        .container {
+          max-height: auto;
+          min-height: 500px;
+          width: auto;
+          padding: 20px;
+          margin: 25px;
+          font-family: 'Open-Sans';
+        }
+
+        .button {
+          background-color: #6377e4; 
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 15px;
+          margin: 3px 2px;
+          cursor: pointer;        
+        }
+
+        .submit{
+          text-align: center;
+        }
+
+        .main-container {
+          padding: 30px;
+        }
+
+        .card-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+        }
+        .card {
+          margin: 50px;
+          padding: 20px;
+          width: 400px;
+          height: 450px;
+          border-radius: 10px;
+          box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        img {
+          width:100%;
+          height: 50%;
+        }
+
+        .info {
+          padding: 5px 16px;
+          font-size: medium;
+          color: rgb(40, 113, 136);
+          display: inline-block;
+          overflow: auto;
+          white-space: nowrap;
+          margin: 0px auto;
+          width: 100%;
+        }
+        a{
+          text-decoration: none;
+          color: blue;
+        }
+
+        .right{
+          float:right;
+        }
+    </style>
+
+    <div class="main-container">
+      {% if session['role'] == 'customer' %}
+        <h1 style="text-align:center; font-size: 5rem;"><u>Your Trip Mates</u></h1>
+        {% if guides!=None %}
+          <div class="card-container">
+            {% for guide in guides %}
+              <div class="card">
+                {% set fname = 'img/dummy.png' %}
+                <img src=" {{ url_for ('static',filename=fname) }} " alt="img">
+                <div class="info">
+                  <h3 style="float: right;"><i class="fa fa-star" aria-hidden="true"></i>{{guide[-1]}}</h3>
+                  <h2 >Guide: <a href="!#">{{guide[1]}}</a> </h2>
+                  <h3>Location: {{guide[4]}}</h3>
+                  <h3>Contact: {{guide[3]}}</h3>
+                  <h3>Gender: {{guide[5]}}</h3>
+                  {% if guide[-5] == 0 %}
+                    <h3>English Compaitability: No</h3>
+                  {% elif guide[-5] == 1 %}
+                    <h3>English Compaitability: Yes</h3>
+                  {% endif %}
+                  <h3>Price/Day: <i class="fa fa-rupee-sign" aria-hidden="true"></i> {{guide[-4]}}</h3>
+                </div>
+                </br>
+                {% if guide[-3] == 'A' %}
+                  <div class="submit">
+                    <a class="button" href="/book_guide/{{guide[0]}}/{{guide[1]}}/{{guide[4]}}">Book Guide</a>
+                  </div>
+                {% elif guide[-3] == 'NA' %}
+                  <div class="submit">
+                    <div class="button" style="background-color: gray;">Not Available</a></div>
+                  </div>   
+                {% endif %}     
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% else %}
+        <h1 style="text-align:center; font-size: 5rem;"><u>Fellow Guides</u></h1>
+        {% if guides!=None %}
+          <div class="card-container">
+            {% for guide in guides %}
+              <div class="card">
+                {% set fname = 'img/dummy.png' %}
+                <img src=" {{ url_for ('static',filename=fname) }} " alt="img">
+                <div class="info">
+                  <h3 style="float: right;"><i class="fa fa-star" aria-hidden="true"></i>{{guide[-1]}}</h3>
+                  <h2 >Guide: <a href="!#">{{guide[1]}}</a> </h2>
+                  <h3>Location: {{guide[4]}}</h3>
+                  <h3>Contact: {{guide[3]}}</h3>
+                  <h3>Gender: {{guide[5]}}</h3>
+                  {% if guide[-5] == 0 %}
+                    <h3>English Compaitability: No</h3>
+                  {% elif guide[-5] == 1 %}
+                    <h3>English Compaitability: Yes</h3>
+                  {% endif %}
+                  <h3>Price/Day: <i class="fa fa-rupee-sign" aria-hidden="true"></i> {{guide[-4]}}</h3>
+                </div>
+                </br>    
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div></div>
+        
+{% endblock %}
+
+{% include 'nw_footer.html' %}

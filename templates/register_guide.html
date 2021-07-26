@@ -1,0 +1,150 @@
+{% include 'layout.html' %} 
+{% block subcontent %}
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=email], input[type=password], input[type=tel], input[type=name], input[type=number] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.main-container {
+    width: 50%; /* Could be more or less, depending on screen size */
+    background-color: #fefefe;
+  margin: 10% auto 10% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
+
+.option{
+    width: 100%;
+  padding: 10px 20px;
+  margin: 8px 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+       .option option{
+                   font-size:20px;
+         }
+.regbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #1877f2;
+}
+
+.container {
+  padding: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 650px) {
+  .regbtn {
+     width: 100%;
+  }
+}
+</style>
+
+<div class="main-container">
+    <h2 style="text-align: center"> Guide Register</h2>
+    <form action="/user/guide_register" method="post">
+  <div class="container">
+    <label for="name"><b>Name</b></label>
+    <input type="name" placeholder="Enter Name" name="name" required autofocus>
+
+    <label for="psw"><b>Email</b></label>
+    <input type="email" placeholder="Enter Email" name="email" required>
+
+  
+
+    <label for="number"><b>Mobile number</b></label>
+    <input type="tel" placeholder="Mobile number" name="contact" required>
+
+    <label for="city"><b>Select City :</b></label>
+        <select class="option" name="city" required>
+          <option disabled="disabled" selected="selected">--Choose option--</option>
+          <option value="Ajmer">Ajmer</option>
+          <option value="Alwar">Alwar</option>
+          <option value="Banswara">Banswara</option>
+          <option value="Baran">Baran</option>
+          <option value="Barmer">Barmer</option>
+          <option value="Bharatpur">Bharatpur</option>
+          <option value="Bhilwara">Bhilwara</option>
+          <option value="Bikaner">Bikaner</option>
+          <option value="Bundi">Bundi</option>
+          <option value="Chittorgarh">Chittorgarh</option>
+          <option value="Churu">Churu</option>
+          <option value="Dausa">Dausa</option>
+          <option value="Dholpur">Dholpur</option>
+          <option value="Dungarpur">Dungarpur</option>
+          <option value="Hanumangarh">Hanumangarh</option>
+          <option value="Jaipur">Jaipur</option>
+          <option value="Jaisalmer">Jaisalmer</option>
+          <option value="Jalore">Jalore</option>
+          <option value="Jhalawar">Jhalawar</option>
+          <option value="Jhunjhunu">Jhunjhunu</option>
+          <option value="Jodhpur">Jodhpur</option>
+          <option value="Karauli">Karauli</option>
+          <option value="Kota">Kota</option>
+          <option value="Nagaur">Nagaur</option>
+          <option value="Pali">Pali</option>
+          <option value="Pratapgarh">Pratapgarh</option>
+          <option value="Rajsamand">Rajsamand</option>
+          <option value="Sawai Madhopur">Sawai Madhopur</option>
+          <option value="Sikar">Sikar</option>
+          <option value="Sirohi">Sirohi</option>
+          <option value="Sri Ganganagar">Sri Ganganagar</option>
+          <option value="Tonk">Tonk</option>
+          <option value="Udaipur">Udaipur</option>            
+        </select>
+
+        <label for="gender"><b>Gender :</b></label><br>
+        <input class="radio-one" type="radio" name="gender" value="Male">
+        <label for="male">Male</label><br>
+        <input class="radio-two" type="radio" name="gender" value="Female">
+        <label for="female">Female</label><br><br>
+
+        <label for="english"><b>Are You Confortable with English ? &nbsp;&nbsp;</b></label>
+        <input class="radio-one" type="radio" name="english" value="1">
+        <label for="male">Yes &nbsp;</label>
+        <input class="radio-two" type="radio" name="english" value="0">
+        <label for="female">No</label><br><br>
+        
+        <label for="price"><b>Price per Day :</b></label>
+        <input type="number" placeholder="Enter Price/Day" name="price" required>
+        
+        <label for="psw"><b>Create Password :</b></label>
+        <input type="password" placeholder="Create Password" name="pass" required>
+        
+        <button type="submit">Register Guide</button>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <h3>Already have an Account ?</h3>
+    <a href="/user/guide_login" ><button type="button" class="regbtn">Login As Guide</button></a>
+  </div>
+</form>
+</div>
+
+{% endblock %}
+
+<hr />
+{% include 'nw_footer.html' %}

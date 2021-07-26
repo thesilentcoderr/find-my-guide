@@ -1,0 +1,139 @@
+{% include 'layout.html' %}
+{% block subcontent %}
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    form {
+        border: 3px solid #f1f1f1;
+        padding: 7px;
+    }
+    input[type=text], #city, input[type=name],input[type=date],input[type=number] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+    }
+    .main-container{
+        width: 70%; /* Could be more or less, depending on screen size */
+        background-color: #fefefe;
+        margin: 10% auto 10% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+    }
+    .container{
+        padding: 16px;
+    }
+    .trip_title{
+        text-align: center;
+    }
+    .set{
+        width: 100%;
+        overflow: auto;
+        margin: 0px auto;
+    }
+    button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 40%;
+    }
+
+    .submit{
+        text-align: center;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+    .left{
+        float: left;
+    }
+    .right{
+        float: right;
+    }
+    @media screen and (max-width: 865px) {
+        .left {
+            float: none;
+        }
+        .right{
+            float: none;
+        }
+        button{
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="main-container">
+    <div class="form-title">
+        <h2 style="text-align: center;">Start New Trip</h2>
+    </div>
+    <div class="container">
+    <form class="trip" action="/book_guide/{{id}}/{{guide_name}}/{{city}}" method="post">
+        <div class="trip_title">
+            <input type="text" name="trip_title" placeholder="Give Name To Your Trip" required autofocus/>
+        </div>
+        <div style="margin: 7px;">
+        <div class="set">
+            <div class="left">
+                <label for="city"><b>Select City :</b></label>
+                <input type="name" id="city" name = "city" value="{{city}}" required readonly>
+            </div>
+            <div class="right">
+                <label for="guide"><b>Guide:</b></label>
+                <input type="name" id="guide_name" name="guide_name" value="{{guide_name}}" required readonly>
+            </div>
+        </div>
+        <div class="set">
+            <div class="left">
+                <label for="startDate"><b>Start Date:</b></label>
+                <input type="date" id="startDate" name="start_date" required>
+            </div>
+            <div class="right">
+                <label for="num_day"><b>Num Days To Visit:</b></label>
+                <input type="number" id="num_day" name="num_day" placeholder="Days" min="1" max="7" required>
+            </div>
+        </div>
+        <div class="submit">
+            <button type="submit">Book Guide</button>
+        </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+<script>
+    var today = new Date();
+    var dd_1 = today.getDate()+1;
+    var mm_1 = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+    var yyyy_1 = today.getFullYear();
+    if(dd_1<10){
+        dd_1='0'+dd_1
+    } 
+    if(mm_1<10){
+        mm_1='0'+mm_1
+    } 
+    today = yyyy_1+'-'+mm_1+'-'+dd_1;
+    document.getElementById("startDate").setAttribute("min", today);
+
+    var last = new Date();
+    last.setDate(last.getDate() + 30);
+    var dd_2 = last.getDate()+30;
+    var mm_2 = last.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+    var yyyy_2 = last.getFullYear();
+    if(dd_2<10){
+        dd_2='0'+dd_2
+    } 
+    if(mm_2<10){
+        mm_2='0'+mm_2
+    } 
+    last = yyyy_2+'-'+mm_2+'-'+dd_2;
+    document.getElementById("startDate").setAttribute("max", last);
+
+</script>
+
+{% endblock %}
+<hr />
+{% include 'nw_footer.html' %}

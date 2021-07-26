@@ -1,0 +1,169 @@
+{% include 'layout.html' %}
+{% block subcontent %}
+<style>
+    .blog-area{
+        max-height: auto;
+        min-height: 700px;
+        width: auto;
+        border: 5px solid black;
+        padding: 20px;
+        margin: 25px;
+        background-color: lightgrey;
+        font-family: 'Open-Sans';
+    }
+    h1{
+        text-align:center;
+        display: block;
+        font-size: 3em;
+        font-weight: bold;
+    }
+    h3{
+        text-align:justify;
+        display: block;
+        font-size: 1.5em;
+        font-weight: 200;
+    }
+    .post-info{
+        text-align: right;
+    }
+    h2{
+        display: block;
+        font-size: 2em;
+        font-weight: bold;
+        margin-top: 50px;
+    }
+    div{
+        box-sizing: border-box;
+    }
+
+    input[type=title], select, textarea {
+        background-color: rgb(228, 228, 228);
+        width: 30%;
+        padding: 12px;
+        resize: vertical;
+        text-align:center;
+        display: block;
+        font-size: 3em;
+        font-weight: bold;
+    }
+
+    .form-title{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 6px;
+    }
+
+    input[type=description], select, textarea {
+        width: 100%;
+        padding: 12px;
+        resize: vertical;
+        text-align:justify;
+        display: block;
+        font-size: 1.5em;
+        font-weight: 200;
+    }
+    
+    .description{
+        margin-bottom:6px;
+    }
+
+    input[type="file"]{
+        display: none;
+    }
+    label[for="file-input"]{
+        display: block;
+        position: relative;
+        background-color: #025bee;
+        color: #ffffff;
+        font-size: 18px;
+        text-align: center;
+        width: 300px;
+        padding: 18px 0;
+        margin: auto;
+        margin-bottom: 6px;
+        border-radius: 5px;
+        cursor: pointer;
+}
+    .imgcol p{
+        text-align: center;
+        margin: 20px 0 30px 0;
+    }
+    #images{
+        width: 45%;
+        position: relative;
+        margin: auto;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    button{
+        display: block;
+        background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 200px;
+    }
+    
+    @media screen and (max-width: 500px) {
+        .column {
+            width: 100%;
+        }
+        
+        button{
+            width: 100%;
+        }
+
+        label[for="file-input"]{
+            width: 100%;
+        }
+    }
+
+</style>
+<div class="container">
+    <form class="blog-area" action="/customer_add_blog/{{id}}/" method="post" enctype="multipart/form-data">
+        <div class="form-title">
+            <input type="title" id="title" name="blog_title"  placeholder="Click To Enter Title" >
+        </div>
+        
+        <div class="description">
+            <textarea id="description" name="blog_description" placeholder="Click To Describe Your Journey...." style="height:300px"></textarea>  
+        </div>
+
+        <div class="imgcol">
+            <input type="file"  name="img_link_1" id="file-input" accept="image/png, image/jpeg" onchange="loadFile(event)" >
+            <label for="file-input">
+                <i class="fas fa-upload"></i> &nbsp; Choose A Photo
+            </label>
+            <img id="images">
+        </div>
+
+
+        <div class="post-info">
+            <h2>Posted By:- <a href="">Admin</a></h2>
+            <h3 style="text-align:right;">Date</h3>
+            <h3 style="text-align:right;">Guide</h3>
+        </div>
+
+        <button type="submit">Submit</button>
+
+        <script>
+            var loadFile = function(event) {
+                var images = document.getElementById('images');
+                images.src = URL.createObjectURL(event.target.files[0]);
+                images.onload = function() {
+                    URL.revokeObjectURL(images.src) // free memory
+                }
+            };
+        </script>
+        
+    </form>
+</div>
+
+{% endblock %}

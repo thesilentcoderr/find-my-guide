@@ -4,6 +4,7 @@
 <style>
     .container {
   box-sizing: border-box;
+  min-height: 525px;
   margin: 2rem;
 }
 
@@ -128,69 +129,67 @@
 
 </style>
 
-{% if posts!=None %}
 <div class="container">
-  {% include 'search_bar.html' %}  
+  {% if posts!=None %}
+    {% include 'search_bar.html' %}  
   
     {% for post in posts %}
-
-    <div class="blog-card">
-      
+      <div class="blog-card">
         <div class="meta">
           {% set fname = 'img/' + post[3] %}
-            <div class="photo" style="background-image: url('{{ url_for('static',filename = fname) }}')" alt="blog-photo"></div>
-            
-          </div>
-          <div class="description">
-            <h1>{{ post[1] }}</h1>
-            <p> {{post[2][0:150]}} </p>
-            <h2>Posted By: <a href="#!" >Admin</a></h2>
-            <h2>{{post[-2]}}</h2>
-            <h2>On {{post[5]}}</h2>
+          <div class="photo" style="background-image: url('{{ url_for('static',filename = fname) }}')" alt="blog-photo"></div>
+        </div>
+        <div class="description">
+          <h1>{{ post[1] }}</h1>
+          <p> {{post[2][0:150]}} </p>
+          <h2>Posted By: <a href="#!" >Admin</a></h2>
+          <h2>{{post[-2]}}</h2>
+          <h2>On {{post[5]}}</h2>
 
-            {% if post[-2] == 'GUIDE' %}
+          {% if post[-2] == 'GUIDE' %}
             <p class="read-more">
               <a href="/guides_blog/{{post[0]}}">Read More</a>
             </p>
-            {% elif post[-2] == 'USER' %}
+          {% elif post[-2] == 'USER' %}
             <p class="read-more">
               <a href="/customer_blog/{{post[0]}}">Read More</a>
             </p>
-            {% endif %}
-          </div>
+          {% endif %}
         </div>
+      </div>
     {% endfor %}
             
-
-            
-        
-            <!-- Pager-->
-            {% if type_page == 'last' %}
-            <div class="pager">
-              <div style='float:left;'>
-              <a button class="button" href="{{prev}}">&larr; Older Posts</a></div>
-              <div style='float:right;'>
-              <button style="background-color:grey;" class="button" href="{{next}}">Newer Posts &rarr;</a></div>
-            </div>
-            {% elif type_page == 'start' %}
-            <div class="pager">
-                <div style='float:left;'>
-                <button style="background-color:grey;" class="button" href="{{prev}}">&larr; Older Posts</div>
-                <div style='float:right;'>
-                <a button class="button" href="{{next}}">Newer Posts &rarr;</a></div>
-            </div>
-            {% else %}
-            <div class="pager">
-              <div style='float:left;'>
-              <a button class="button" href="{{prev}}">&larr; Older Posts</a></div>
-              <div style='float:right;'>
-              <a button class="button" href="{{next}}">Newer Posts &rarr;</a></div>
-              </div>
-            {% endif %}
-
-    </div>
+    <!-- Pager-->
+    {% if type_page == 'last' %}
+      <div class="pager">
+        <div style='float:left;'>
+          <a button class="button" href="{{prev}}">&larr; Older Posts</a>
+        </div>
+        <div style='float:right;'>
+          <a button style="background-color:grey;" class="button" href="{{next}}">Newer Posts &rarr;</a>
+        </div>
+      </div>
+    {% elif type_page == 'start' %}
+      <div class="pager">
+        <div style='float:left;'>
+          <a button style="background-color:grey;" class="button" href="{{prev}}">&larr; Older Posts</a>
+        </div>
+        <div style='float:right;'>
+          <a button class="button" href="{{next}}">Newer Posts &rarr;</a>
+        </div>
+      </div>
+    {% else %}
+      <div class="pager">
+        <div style='float:left;'>
+          <a button class="button" href="{{prev}}">&larr; Older Posts</a>
+        </div>
+        <div style='float:right;'>
+          <a button class="button" href="{{next}}">Newer Posts &rarr;</a>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
 </div>
-{% endif %}
 
 {% endblock %}
 <hr />
