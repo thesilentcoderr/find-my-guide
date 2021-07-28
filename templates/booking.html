@@ -156,7 +156,7 @@
                       <h3>Status: {{trip[6]}}</h3>
 
                       <var id="trip_id" hidden>{{trip[0]}}</var>
-                      <var id="guide_id" hidden>{{trip[-5]}}</var>
+                      <var id="guide_id" hidden>{{trip[-6]}}</var>
                       
                       {% if session['role'] == 'customer' %}
                         {% if trip[-1] == trip[5] %}
@@ -216,4 +216,4 @@
 
 {% endblock %}
 
-{% include 'nw_footer.html' %}
+<!--{% include 'nw_footer.html' %}-->

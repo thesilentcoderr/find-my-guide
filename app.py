@@ -195,7 +195,7 @@ def booking():
     if 'user' in session:
         cur = mysql.connection.cursor()
         if session['role'] == 'customer':
-            q = cur.execute("select booking.*,customer_blogs.img_link_1,guides.full_name,ratings.rating,date(curdate()+2)  from  customer_blogs,booking,guides,ratings where customer_blogs.blog_id=booking.booking_id and booking.guide_id=guides.id and ratings.booking_id=booking.booking_id and booking.customer_id={} ORDER BY booking_id DESC; ".format(session['id']))
+            q = cur.execute("select booking.*,customer_blogs.img_link_1,guides.full_name,ratings.rating,date,curdate()  from  customer_blogs,booking,guides,ratings where customer_blogs.blog_id=booking.booking_id and booking.guide_id=guides.id and ratings.booking_id=booking.booking_id and booking.customer_id={} ORDER BY booking_id DESC; ".format(session['id']))
         else:
             q = cur.execute("select booking.*,customer_blogs.img_link_1,guides.full_name,ratings.rating,curdate()  from  customer_blogs,booking,guides,ratings where customer_blogs.blog_id=booking.booking_id and booking.guide_id=guides.id and ratings.booking_id=booking.booking_id and booking.guide_id={} ORDER BY booking_id DESC; ".format(session['id']))
         if q>0:
