@@ -290,16 +290,17 @@ def customer_add_blog(id):
         return render_template('add_blog.html',id=id)
     return redirect('/')
 
-@app.route("/guide_add_blog", methods=['GET', 'POST'])
-def guide_add_blog():
+@app.route("/guide_add_blog/<int:blog_id>", methods=['GET', 'POST'])
+def guide_add_blog(blod_id):
     if 'user' in session:
         if request.method == 'POST':
+            blog_id=blod_id
             form = request.form
             title=form['blog_title']
             description=form['blog_description']
             img_link_1= form['img_link_1']
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO guides_blogs(blog_id,title,description,img_link_1,guide_id) VALUES (%s,%s,%s,%s,%s,%s);", (blog_id, title, description,img_link_1,img_link_2,session['id']))
+            cur.execute("INSERT INTO guides_blogs(blog_id,title,description,img_link_1,guide_id) VALUES (%s,%s,%s,%s,%s);", (blog_id, title, description,img_link_1,session['id']))
             mysql.connection.commit()
             cur.close()
         return render_template('add_blog.html')
